@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日大赛爆料 - 原创资讯,赛事内幕与创作者社区</title>
+<meta name="description" content="每日大赛爆料官方网站，专注赛事资讯、内幕爆料与原创内容生态，汇聚专业创作者，打造值得信赖的赛事内容社区。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Cpath d='M18 40 L32 16 L46 40 Z' fill='%23f9b234'/%3E%3Ccircle cx='32' cy='46' r='6' fill='%23ef4444'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --mc-bg:#0d1117;
+    --mc-panel:#151b24;
+    --mc-panel2:#1c232e;
+    --mc-line:#2a3341;
+    --mc-text:#e6ebf2;
+    --mc-muted:#93a1b3;
+    --mc-gold:#f9b234;
+    --mc-red:#ef4444;
+    --mc-cyan:#38d6c4;
+    --mc-radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--mc-bg);
+    color:var(--mc-text);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ul{list-style:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  section{scroll-margin-top:120px}
+
+  .mc-wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+
+  /* ===== 吸顶区域 ===== */
+  .mc-sticky{position:sticky;top:0;z-index:60}
+  .mc-notice{
+    background:linear-gradient(90deg,#8a5a0a,#f9b234 45%,#8a2f0a);
+    color:#1a1204;
+    font-size:13.5px;
+    font-weight:700;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .mc-notice-track{
+    display:inline-flex;
+    gap:60px;
+    padding:7px 22px 7px 100%;
+    animation:mcScroll 34s linear infinite;
+  }
+  .mc-notice-track span{display:inline-flex;align-items:center;gap:8px}
+  .mc-notice-track b{
+    background:#1a1204;color:var(--mc-gold);
+    border-radius:4px;padding:0 6px;font-size:11.5px;letter-spacing:.5px;
+  }
+  @keyframes mcScroll{to{transform:translateX(-200%)}}
+
+  .mc-header{
+    background:rgba(13,17,23,.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--mc-line);
+  }
+  .mc-header-inner{
+    display:flex;align-items:center;gap:26px;
+    height:66px;
+  }
+  .mc-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.5px;flex-shrink:0}
+  .mc-logo-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(135deg,#f9b234,#ef4444);
+    display:grid;place-items:center;color:#0d1117;font-size:15px;font-weight:900;
+  }
+  .mc-logo small{display:block;font-size:10.5px;font-weight:500;color:var(--mc-muted);letter-spacing:2px;line-height:1}
+  .mc-nav{display:flex;gap:4px;margin-left:8px;flex:1}
+  .mc-nav a{
+    font-size:14.5px;color:var(--mc-muted);padding:8px 12px;border-radius:8px;
+    transition:.2s;white-space:nowrap;
+  }
+  .mc-nav a:hover{color:var(--mc-gold);background:rgba(249,178,52,.08)}
+  .mc-search{
+    display:flex;align-items:center;gap:6px;
+    background:var(--mc-panel2);
+    border:1px solid var(--mc-line);
+    border-radius:99px;padding:5px 6px 5px 14px;
+    width:230px;flex-shrink:0;
+  }
+  .mc-search input{
+    background:none;border:none;outline:none;color:var(--mc-text);
+    font-size:13.5px;width:100%;
+  }
+  .mc-search input::placeholder{color:#5f6b7c}
+  .mc-search button{
+    background:var(--mc-gold);color:#141a10;font-size:13px;font-weight:700;
+    padding:5px 13px;border-radius:99px;transition:.2s;
+  }
+  .mc-search button:hover{background:#ffc95e}
+  .mc-burger{display:none;font-size:22px;color:var(--mc-gold);padding:4px 8px}
+
+  /* ===== 首屏 ===== */
+  .mc-hero{
+    position:relative;
+    padding:64px 0 54px;
+    overflow:hidden;
+    border-bottom:1px solid var(--mc-line);
+  }
+  .mc-hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(680px 340px at 82% 8%,rgba(249,178,52,.16),transparent 70%),
+      radial-gradient(520px 300px at 6% 92%,rgba(56,214,196,.12),transparent 70%);
+    pointer-events:none;
+  }
+  .mc-hero-grid{
+    position:relative;
+    display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;
+  }
+  .mc-kicker{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;letter-spacing:2px;color:var(--mc-gold);
+    border:1px solid rgba(249,178,52,.4);border-radius:99px;
+    padding:5px 15px;margin-bottom:20px;
+    background:rgba(249,178,52,.07);
+  }
+  .mc-kicker i{width:6px;height:6px;border-radius:50%;background:var(--mc-red);animation:mcPulse 1.6s infinite}
+  @keyframes mcPulse{50%{opacity:.25}}
+  h1{
+    font-size:clamp(34px,4.6vw,54px);
+    line-height:1.16;font-weight:900;letter-spacing:-.5px;
+    margin-bottom:18px;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--mc-gold),#ff7a4d 70%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .mc-hero-lead{
+    font-size:15px;color:var(--mc-muted);max-width:560px;margin-bottom:26px;
+  }
+  .mc-hero-lead strong{color:var(--mc-text)}
+  .mc-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .mc-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 24px;border-radius:10px;font-size:14.5px;font-weight:700;
+    transition:.22s;border:1px solid transparent;
+  }
+  .mc-btn-primary{background:var(--mc-gold);color:#17130a}
+  .mc-btn-primary:hover{background:#ffc95e;transform:translateY(-2px)}
+  .mc-btn-ghost{border-color:var(--mc-line);color:var(--mc-text);background:var(--mc-panel)}
+  .mc-btn-ghost:hover{border-color:var(--mc-gold);color:var(--mc-gold);transform:translateY(-2px)}
+  .mc-stat-row{display:flex;gap:36px;flex-wrap:wrap}
+  .mc-stat b{display:block;font-size:26px;font-weight:900;color:var(--mc-gold);line-height:1.2}
+  .mc-stat span{font-size:12.5px;color:var(--mc-muted);letter-spacing:1px}
+
+  .mc-hero-visual{position:relative}
+  .mc-hero-visual .mc-frame{
+    border-radius:18px;overflow:hidden;
+    border:1px solid var(--mc-line);
+    box-shadow:0 26px 60px -22px rgba(0,0,0,.8);
+    background:var(--mc-panel);
+  }
+  .mc-hero-visual img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .mc-live-chip{
+    position:absolute;top:14px;left:14px;
+    display:flex;align-items:center;gap:7px;
+    background:rgba(13,17,23,.82);border:1px solid rgba(239,68,68,.55);
+    color:#ff8f8f;font-size:12px;font-weight:700;
+    padding:5px 12px;border-radius:99px;backdrop-filter:blur(4px);
+  }
+  .mc-live-chip i{width:7px;height:7px;border-radius:50%;background:var(--mc-red);animation:mcPulse 1.4s infinite}
+  .mc-float-card{
+    position:absolute;right:-14px;bottom:-22px;
+    width:60%;max-width:270px;
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:12px;padding:13px 15px;
+    box-shadow:0 16px 40px -14px #000;
+  }
+  .mc-float-card h4{font-size:13.5px;margin-bottom:5px;color:var(--mc-gold)}
+  .mc-float-card p{font-size:12px;color:var(--mc-muted);line-height:1.6}
+
+  /* ===== 通用 section ===== */
+  .mc-section{padding:66px 0}
+  .mc-section.alt{background:var(--mc-panel);border-top:1px solid var(--mc-line);border-bottom:1px solid var(--mc-line)}
+  .mc-sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+  .mc-sec-head h2{font-size:clamp(23px,3vw,31px);font-weight:900;letter-spacing:-.3px;position:relative;padding-left:16px}
+  .mc-sec-head h2::before{
+    content:"";position:absolute;left:0;top:8px;bottom:8px;width:5px;border-radius:3px;
+    background:linear-gradient(180deg,var(--mc-gold),var(--mc-red));
+  }
+  .mc-sec-head p{color:var(--mc-muted);font-size:14px;max-width:520px}
+  .mc-sec-more{font-size:13.5px;color:var(--mc-gold);border-bottom:1px dashed rgba(249,178,52,.5);padding-bottom:2px}
+
+  /* ===== 深度解析 ===== */
+  .mc-essay{
+    display:grid;grid-template-columns:1fr 1fr;gap:34px;
+    background:var(--mc-panel);border:1px solid var(--mc-line);
+    border-radius:var(--mc-radius);padding:34px;
+  }
+  .mc-essay h3{font-size:19px;margin-bottom:14px;color:var(--mc-gold)}
+  .mc-essay p{font-size:14px;color:var(--mc-muted);margin-bottom:14px;text-align:justify}
+  .mc-essay p strong{color:var(--mc-text)}
+  .mc-essay-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .mc-tag{
+    font-size:12px;color:var(--mc-cyan);
+    background:rgba(56,214,196,.09);
+    border:1px solid rgba(56,214,196,.3);
+    border-radius:99px;padding:3px 11px;
+  }
+
+  /* ===== 焦点内容 ===== */
+  .mc-focus-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+  .mc-feature-card{
+    position:relative;border-radius:16px;overflow:hidden;
+    border:1px solid var(--mc-line);background:var(--mc-panel2);
+    transition:.28s;
+  }
+  .mc-feature-card:hover{transform:translateY(-4px);border-color:rgba(249,178,52,.55)}
+  .mc-feature-card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .mc-feature-body{padding:20px 22px 22px}
+  .mc-feature-body .mc-meta{font-size:12px;color:var(--mc-muted);display:flex;gap:14px;margin-bottom:9px;flex-wrap:wrap}
+  .mc-feature-body h3{font-size:20px;margin-bottom:9px;line-height:1.4}
+  .mc-feature-body p{font-size:13.5px;color:var(--mc-muted);margin-bottom:14px}
+  .mc-mini-list{display:grid;gap:14px}
+  .mc-mini-card{
+    display:grid;grid-template-columns:128px 1fr;gap:14px;
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:12px;overflow:hidden;transition:.24s;
+  }
+  .mc-mini-card:hover{border-color:rgba(249,178,52,.5);transform:translateX(3px)}
+  .mc-mini-card img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
+  .mc-mini-info{padding:13px 14px 13px 0;display:flex;flex-direction:column;justify-content:center}
+  .mc-mini-info h4{font-size:15px;line-height:1.45;margin-bottom:6px}
+  .mc-mini-info span{font-size:12px;color:var(--mc-muted)}
+
+  /* ===== 热门视频流 ===== */
+  .mc-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .mc-vcard{
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:13px;overflow:hidden;transition:.26s;
+    display:flex;flex-direction:column;
+  }
+  .mc-vcard:hover{transform:translateY(-5px);border-color:rgba(249,178,52,.5);box-shadow:0 18px 40px -22px #000}
+  .mc-vthumb{position:relative}
+  .mc-vthumb img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .mc-vbadge{
+    position:absolute;top:10px;left:10px;
+    background:rgba(13,17,23,.78);border:1px solid var(--mc-line);
+    color:var(--mc-gold);font-size:11px;font-weight:700;
+    padding:2px 9px;border-radius:99px;backdrop-filter:blur(3px);
+  }
+  .mc-vtime{
+    position:absolute;right:10px;bottom:10px;
+    background:rgba(0,0,0,.7);color:#fff;font-size:11px;
+    padding:1px 7px;border-radius:4px;
+  }
+  .mc-vbody{padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .mc-vbody h3{font-size:15.5px;line-height:1.5}
+  .mc-vbody p{font-size:12.5px;color:var(--mc-muted);flex:1}
+  .mc-vfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--mc-line);padding-top:10px;margin-top:2px}
+  .mc-author{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mc-muted)}
+  .mc-avatar{
+    width:24px;height:24px;border-radius:50%;
+    display:grid;place-items:center;font-size:11px;font-weight:800;color:#12160f;
+    flex-shrink:0;
+  }
+  .mc-vactions{display:flex;gap:4px}
+  .mc-icon-btn{
+    font-size:12px;color:var(--mc-muted);padding:3px 7px;border-radius:6px;
+    display:inline-flex;align-items:center;gap:4px;transition:.18s;
+  }
+  .mc-icon-btn:hover{background:rgba(249,178,52,.12);color:var(--mc-gold)}
+  .mc-icon-btn.on{color:var(--mc-red)}
+
+  /* ===== 专题 ===== */
+  .mc-topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .mc-topic{
+    position:relative;border-radius:13px;overflow:hidden;border:1px solid var(--mc-line);
+    background:var(--mc-panel2);transition:.26s;
+  }
+  .mc-topic:hover{transform:translateY(-4px);border-color:rgba(56,214,196,.5)}
+  .mc-topic img{width:100%;aspect-ratio:3/4;object-fit:cover;opacity:.86}
+  .mc-topic-info{
+    position:absolute;inset:auto 0 0 0;padding:46px 14px 15px;
+    background:linear-gradient(transparent,rgba(9,12,17,.95) 60%);
+  }
+  .mc-topic-info h4{font-size:15px;margin-bottom:5px}
+  .mc-topic-info span{font-size:11.5px;color:var(--mc-cyan)}
+
+  /* ===== 创作者 ===== */
+  .mc-creator-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .mc-creator{
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:13px;padding:22px 18px;text-align:center;transition:.26s;
+  }
+  .mc-creator:hover{border-color:rgba(249,178,52,.55);transform:translateY(-4px)}
+  .mc-creator .mc-big-avatar{
+    width:62px;height:62px;border-radius:50%;margin:0 auto 12px;
+    display:grid;place-items:center;font-size:22px;font-weight:900;color:#12160f;
+  }
+  .mc-creator h3{font-size:16px;margin-bottom:3px}
+  .mc-creator .mc-role{font-size:12px;color:var(--mc-gold);margin-bottom:9px}
+  .mc-creator p{font-size:12.5px;color:var(--mc-muted);min-height:56px}
+  .mc-creator-stats{display:flex;justify-content:center;gap:18px;margin-top:10px;font-size:12px;color:var(--mc-muted)}
+  .mc-creator-stats b{display:block;color:var(--mc-text);font-size:14.5px}
+  .mc-creator-more{margin-top:12px;font-size:12.5px;color:var(--mc-cyan)}
+
+  /* ===== 评价 ===== */
+  .mc-comments{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .mc-comment{
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:13px;padding:20px;position:relative;
+  }
+  .mc-comment::before{
+    content:"“";position:absolute;right:16px;top:2px;
+    font-size:52px;color:rgba(249,178,52,.16);font-family:Georgia,serif;line-height:1;
+  }
+  .mc-comment-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .mc-comment-head b{font-size:13.5px;display:block}
+  .mc-comment-head span{font-size:11.5px;color:var(--mc-muted)}
+  .mc-comment p{font-size:13px;color:var(--mc-muted);position:relative;z-index:1}
+
+  /* ===== 榜单 ===== */
+  .mc-rank-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .mc-rank{
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:13px;padding:22px;
+  }
+  .mc-rank h3{font-size:16px;margin-bottom:14px;color:var(--mc-gold);display:flex;align-items:center;gap:8px}
+  .mc-rank ol{display:grid;gap:11px;counter-reset:mcrank}
+  .mc-rank li{
+    display:flex;align-items:center;gap:11px;font-size:13.5px;
+    padding-bottom:11px;border-bottom:1px dashed var(--mc-line);
+  }
+  .mc-rank li:last-child{border:none;padding-bottom:0}
+  .mc-rank li::before{
+    counter-increment:mcrank;content:counter(mcrank);
+    width:21px;height:21px;border-radius:6px;flex-shrink:0;
+    background:var(--mc-panel);border:1px solid var(--mc-line);
+    display:grid;place-items:center;font-size:11.5px;color:var(--mc-muted);font-weight:800;
+  }
+  .mc-rank li:nth-child(1)::before{background:var(--mc-gold);color:#141a10;border-color:transparent}
+  .mc-rank li:nth-child(2)::before{background:#c3ccd8;color:#141a10;border-color:transparent}
+  .mc-rank li:nth-child(3)::before{background:#c58a4a;color:#141a10;border-color:transparent}
+  .mc-rank li em{font-style:normal;color:var(--mc-muted);font-size:11.5px;margin-left:auto;white-space:nowrap}
+
+  /* ===== 动态 & FAQ ===== */
+  .mc-two-col{display:grid;grid-template-columns:1fr 1.15fr;gap:34px;align-items:start}
+  .mc-newsitem{
+    display:grid;grid-template-columns:96px 1fr;gap:14px;
+    padding:15px 0;border-bottom:1px dashed var(--mc-line);
+  }
+  .mc-newsitem:last-child{border:none}
+  .mc-newsitem time{font-size:12px;color:var(--mc-gold);font-weight:700}
+  .mc-newsitem h4{font-size:14.5px;margin-bottom:4px}
+  .mc-newsitem p{font-size:12.5px;color:var(--mc-muted)}
+
+  .mc-faq details{
+    background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:11px;margin-bottom:10px;overflow:hidden;
+  }
+  .mc-faq summary{
+    padding:14px 18px;font-size:14px;font-weight:700;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;list-style:none;
+  }
+  .mc-faq summary::-webkit-details-marker{display:none}
+  .mc-faq summary::after{content:"+";color:var(--mc-gold);font-size:19px;font-weight:400;flex-shrink:0}
+  .mc-faq details[open] summary::after{content:"−"}
+  .mc-faq details[open] summary{color:var(--mc-gold)}
+  .mc-faq details p{padding:0 18px 16px;font-size:13px;color:var(--mc-muted)}
+
+  /* ===== 投稿 / 联系 ===== */
+  .mc-cta{
+    background:linear-gradient(120deg,rgba(249,178,52,.14),rgba(239,68,68,.1));
+    border:1px solid rgba(249,178,52,.32);
+    border-radius:18px;padding:40px;display:grid;grid-template-columns:1.5fr 1fr;
+    gap:30px;align-items:center;
+  }
+  .mc-cta h2{font-size:clamp(22px,2.8vw,29px);margin-bottom:12px}
+  .mc-cta p{font-size:14px;color:var(--mc-muted);max-width:560px}
+  .mc-cta-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+
+  /* ===== 页脚 ===== */
+  .mc-footer{background:#080b10;border-top:1px solid var(--mc-line);padding:48px 0 22px}
+  .mc-footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:32px}
+  .mc-footer-grid h4{font-size:13.5px;margin-bottom:13px;color:var(--mc-gold)}
+  .mc-footer-grid li{font-size:13px;color:var(--mc-muted);margin-bottom:8px;transition:.2s}
+  .mc-footer-grid li:hover{color:var(--mc-text)}
+  .mc-footer-desc{font-size:13px;color:var(--mc-muted);max-width:320px;margin-top:12px}
+  .mc-footer-bottom{
+    border-top:1px solid var(--mc-line);padding-top:20px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:12.5px;color:#6b7789;
+  }
+
+  /* ===== Toast / 弹窗 / 回顶 ===== */
+  .mc-toast{
+    position:fixed;left:50%;bottom:34px;transform:translate(-50%,24px);
+    background:var(--mc-gold);color:#141a10;font-size:13.5px;font-weight:700;
+    padding:10px 22px;border-radius:99px;opacity:0;pointer-events:none;
+    transition:.3s;z-index:200;box-shadow:0 12px 30px -10px #000;
+  }
+  .mc-toast.show{opacity:1;transform:translate(-50%,0)}
+  .mc-modal{
+    position:fixed;inset:0;background:rgba(4,6,9,.78);
+    display:none;place-items:center;padding:22px;z-index:180;backdrop-filter:blur(4px);
+  }
+  .mc-modal.show{display:grid}
+  .mc-modal-box{
+    background:var(--mc-panel);border:1px solid var(--mc-line);
+    border-radius:16px;padding:28px;width:100%;max-width:470px;position:relative;
+  }
+  .mc-modal-box h3{font-size:18px;margin-bottom:8px;color:var(--mc-gold)}
+  .mc-modal-box p{font-size:13.5px;color:var(--mc-muted);margin-bottom:16px}
+  .mc-modal-box input,.mc-modal-box textarea{
+    width:100%;background:var(--mc-panel2);border:1px solid var(--mc-line);
+    border-radius:9px;padding:10px 13px;color:var(--mc-text);font-size:13.5px;
+    outline:none;margin-bottom:12px;font-family:inherit;
+  }
+  .mc-modal-box textarea{min-height:92px;resize:vertical}
+  .mc-modal-box input:focus,.mc-modal-box textarea:focus{border-color:var(--mc-gold)}
+  .mc-modal-close{position:absolute;right:14px;top:10px;font-size:22px;color:var(--mc-muted)}
+  .mc-modal-close:hover{color:var(--mc-red)}
+  .mc-backtop{
+    position:fixed;right:22px;bottom:26px;width:44px;height:44px;border-radius:50%;
+    background:var(--mc-gold);color:#141a10;font-size:19px;font-weight:900;
+    display:grid;place-items:center;opacity:0;pointer-events:none;
+    transition:.28s;z-index:120;box-shadow:0 10px 26px -8px rgba(0,0,0,.7);
+  }
+  .mc-backtop.show{opacity:1;pointer-events:auto}
+  .mc-backtop:hover{background:#ffc95e;transform:translateY(-3px)}
+
+  /* ===== 响应式 ===== */
+  @media(max-width:1000px){
+    .mc-hero-grid{grid-template-columns:1fr;gap:40px}
+    .mc-float-card{position:static;width:100%;max-width:none;margin-top:14px}
+    .mc-essay{grid-template-columns:1fr;padding:26px}
+    .mc-focus-grid{grid-template-columns:1fr}
+    .mc-flow{grid-template-columns:repeat(2,1fr)}
+    .mc-topic-grid{grid-template-columns:repeat(2,1fr)}
+    .mc-creator-grid{grid-template-columns:repeat(2,1fr)}
+    .mc-comments{grid-template-columns:1fr 1fr}
+    .mc-rank-grid{grid-template-columns:1fr}
+    .mc-two-col{grid-template-columns:1fr}
+    .mc-cta{grid-template-columns:1fr;padding:30px}
+    .mc-cta-btns{justify-content:flex-start}
+    .mc-footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    .mc-sticky{position:static}
+    .mc-header-inner{height:auto;flex-wrap:wrap;padding:12px 0;gap:12px}
+    .mc-burger{display:block;margin-left:auto}
+    .mc-nav{
+      display:none;flex-basis:100%;flex-direction:column;gap:2px;margin:0;
+      border-top:1px solid var(--mc-line);padding-top:10px;
+    }
+    .mc-nav.open{display:flex}
+    .mc-nav a{padding:10px 8px}
+    .mc-search{order:5;flex-basis:100%;width:100%}
+    .mc-nav{order:4}
+    .mc-hero{padding:44px 0 40px}
+    .mc-flow,.mc-comments{grid-template-columns:1fr}
+    .mc-topic-grid{grid-template-columns:1fr 1fr}
+    .mc-creator-grid{grid-template-columns:1fr}
+    .mc-stat-row{gap:24px}
+    section{scroll-margin-top:20px}
+    .mc-footer-grid{grid-template-columns:1fr}
+    .mc-footer-bottom{flex-direction:column;gap:8px}
+  }
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- ============ 吸顶公告 + 页头 ============ -->
+<div class="mc-sticky">
+  <div class="mc-notice" aria-label="最新爆料公告">
+    <div class="mc-notice-track">
+      <span><b>新增</b>11月19日城市赛区终审名单与现场爆料已上线</span>
+      <span><b>爆料</b>三支黑马战队的赛前训练细节独家披露</span>
+      <span><b>更新</b>赛事时间线、赛制说明与赛事规则同步修订</span>
+      <span><b>报名</b>2026冬季赛区报名通道开启，限时征集</span>
+      <span><b>榜单</b>本周热度榜、新人榜、口碑榜已刷新</span>
+    </div>
+  </div>
+
+  <header class="mc-header">
+    <div class="mc-wrap mc-header-inner">
+      <a href="#mc-top" class="mc-logo" aria-label="每日大赛爆料官方网站首页">
+        <span class="mc-logo-mark">爆</span>
+        <span>每日大赛爆料<small>DAILY ARENA SCOOP</small></span>
+      </a>
+      <nav class="mc-nav" id="mcNav" aria-label="主导航">
+        <a href="#mc-focus">爆料焦点</a>
+        <a href="#mc-flow">热门内容</a>
+        <a href="#mc-topics">专题企划</a>
+        <a href="#mc-creators">创作者</a>
+        <a href="#mc-rank">榜单</a>
+        <a href="#mc-news">官方动态</a>
+        <a href="#mc-faq">帮助</a>
+        <a href="#mc-join">联系投稿</a>
+      </nav>
+      <div class="mc-search" role="search">
+        <input type="search" id="mcSearchInput" placeholder="搜索赛事、战队或爆料线索" aria-label="站内搜索">
+        <button type="button" id="mcSearchBtn">搜索</button>
+      </div>
+      <button class="mc-burger" id="mcBurger" aria-label="展开导航" aria-expanded="false">☰</button>
+    </div>
+  </header>
+</div>
+
+<main id="mc-top">
+
+  <!-- ============ 首屏 ============ -->
+  <section class="mc-hero">
+    <div class="mc-wrap mc-hero-grid">
+      <div>
+        <span class="mc-kicker"><i></i>官方网站 · 赛事内容与爆料平台</span>
+        <h1><em>每日大赛爆料</em>，记录每一场比赛背后的真实细节</h1>
+        <p class="mc-hero-lead">
+          这里是<strong>每日大赛爆料官方网站</strong>。我们以企业级的采编标准与持续运营的社区机制，
+          为赛事爱好者、参赛战队与内容创作者提供可靠的一手资讯、赛后复盘与深度访谈。
+          作为深耕赛事资讯垂直领域的原创品牌，我们把每一条爆料都建立在多方核实与现场记录之上，
+          让热度之外，还有值得信赖的判断依据。
+        </p>
+        <div class="mc-hero-actions">
+          <a href="#mc-focus" class="mc-btn mc-btn-primary">查看今日爆料焦点</a>
+          <a href="#mc-join" class="mc-btn mc-btn-ghost">提交爆料线索</a>
+          <a href="#mc-creators" class="mc-btn mc-btn-ghost">认识创作者</a>
+        </div>
+        <div class="mc-stat-row">
+          <div class="mc-stat"><b>3,860+</b><span>累计原创内容</span></div>
+          <div class="mc-stat"><b>126</b><span>合作赛事与赛区</span></div>
+          <div class="mc-stat"><b>41.2 万</b><span>社区注册用户</span></div>
+        </div>
+      </div>
+      <div class="mc-hero-visual">
+        <div class="mc-frame">
+          <span class="mc-live-chip"><i></i>现场直击</span>
+          <img alt="每日大赛爆料总决赛现场观众席与中央大屏的16:9主视觉" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23151b24'/%3E%3Cstop offset='1' stop-color='%232a1a08'/%3E%3C/linearGradient%3E%3CradialGradient id='g2' cx='.62' cy='.2' r='.7'%3E%3Cstop offset='0' stop-color='%23f9b234' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23f9b234' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='500' fill='url(%23g1)'/%3E%3Crect width='800' height='500' fill='url(%23g2)'/%3E%3Ccircle cx='560' cy='150' r='96' fill='none' stroke='%23f9b234' stroke-width='3' opacity='.7'/%3E%3Ccircle cx='560' cy='150' r='66' fill='none' stroke='%23ef4444' stroke-width='2' opacity='.6'/%3E%3Cpath d='M540 132 L552 178 L588 178 L560 198 L570 236 L540 214 L510 236 L520 198 L492 178 L528 178 Z' fill='%23f9b234' opacity='.85'/%3E%3Cg opacity='.5'%3E%3Crect x='60' y='330' width='170' height='14' rx='7' fill='%2338d6c4'/%3E%3Crect x='60' y='358' width='110' height='14' rx='7' fill='%23f9b234'/%3E%3Crect x='60' y='386' width='140' height='14' rx='7' fill='%23ef4444' opacity='.7'/%3E%3C/g%3E%3Cg stroke='%23e6ebf2' stroke-opacity='.18' stroke-width='2' fill='none'%3E%3Cpath d='M200 470 L240 404 L280 470 Z'/%3E%3Cpath d='M300 470 L340 398 L380 470 Z'/%3E%3C/g%3E%3Ctext x='60' y='250' fill='%23e6ebf2' font-size='30' font-weight='bold' opacity='.9' font-family='sans-serif'%3EDAY 01%3C/text%3E%3C/svg%3E">
+        </div>
+        <div class="mc-float-card">
+          <h4>今日核实进展</h4>
+          <p>编辑部已完成 17 条线索交叉验证，其中 9 条进入公开发布流程，新增 3 段现场影像素材。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 品牌深度解析 ============ -->
+  <section class="mc-section" id="mc-about">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>关于每日大赛爆料：我们如何定义赛事内容</h2>
+          <p>一家把核实流程写进日常的赛事资讯企业，用原创与专业支撑每一次公开表达。</p>
+        </div>
+      </div>
+      <div class="mc-essay">
+        <div>
+          <h3>品牌定位与内容基因</h3>
+          <p><strong>每日大赛爆料</strong>是一家专注于赛事资讯、赛程解析与现场爆料的内容品牌，以官方网站形态持续运营。我们并不把自己理解为简单的信息搬运方，而是一支具备采编流程、事实核查标准与社区运营能力的内容团队。每一条被公开发布的爆料，都要经过线索登记、来源确认、交叉印证与编辑复核四个环节；在速度与准确之间，我们选择先把准确性放在前面，再用更高效率的发布节奏去补齐时效。</p>
+          <p>品牌的成长轨迹源于一个朴素的观察：赛事的热度往往集中在结果公布的几个小时，而真正有价值的内容，藏在结果之前与之后的漫长时间里。备战期的训练安排、赛制调整带来的策略变化、选手与教练之间的沟通方式、赛事组织方在规则设计上的取舍，这些都是可以被记录、被拆解、被反复阅读的素材。每日大赛爆料希望把这些内容做成可持续的内容生态，让赛事不止有比分，还有可以学习的方法与可以共鸣的故事。</p>
+          <p>我们同样重视内容生态的开放性。平台设有创作者通道，任何愿意遵守核实规范的用户都可以提交线索、上传素材、参与选题共建。编辑部会为优质线索提供编辑支持与影像后期协助，让个体记录也能获得专业表达的水准。这种协作机制让我们在垂直领域保持稳定的更新密度，也让社区逐步形成自我校正的讨论氛围。</p>
+          <h3>为什么选择我们</h3>
+          <p>在赛事内容高度同质化的环境里，用户首选一家平台的理由通常不是数量，而是可信。我们的编辑团队保持固定的复盘会议制度，对已发布的爆料做结果追踪与纠错公开；对于出现偏差的内容，我们会在页面同步更新更正说明，而不是悄悄下架。这样的做法在短期内会消耗精力，却在长期积累了口碑。持续运营至今，每日大赛爆料已与多个赛区、俱乐部与创作者工作室形成稳定合作，覆盖城市赛、线上赛、高校赛与公开邀请赛等多种形态。</p>
+        </div>
+        <div>
+          <h3>内容方法与呈现形态</h3>
+          <p>平台内容主要分为四条线：第一条是现场爆料线，以影像记录与在场观察为主，强调一手素材与时间戳；第二条是深度解析线，围绕赛制、战术与数据展开，强调逻辑完整与来源可查；第三条是人物访谈线，关注参赛者、教练、裁判与赛事组织者的真实表达；第四条是社区共建线，把用户的投稿、讨论与经验整理为可检索的内容单元。四条线相互交叉，构成一个既有速度又有厚度的内容体系。</p>
+          <p>在呈现上，我们坚持高清画面与清晰排版。视频封面、图文详情、数据面板与音频播客使用统一的设计语言，保证用户在不同终端上获得一致的阅读体验。我们相信，品质感不是装饰，而是一种对信息负责的态度——清晰的层级让读者更快找到重点，克制的视觉让内容本身成为主角。</p>
+          <p>关于未来，我们会把重心放在两个方向：一是进一步强化事实核查的透明度，尝试公开更多可回溯的来源说明；二是把社区中的优质创作者推向更明确的成长路径，通过比赛、报名、投票与挑战等机制，让真实、温暖而有力量的内容被更多人看见。这是我们对赛事内容的一份长期承诺，也是每日大赛爆料这个品牌希望持续传递的价值。</p>
+          <div class="mc-essay-tags">
+            <span class="mc-tag">赛事资讯</span>
+            <span class="mc-tag">原创爆料</span>
+            <span class="mc-tag">现场影像</span>
+            <span class="mc-tag">深度访谈</span>
+            <span class="mc-tag">社区共建</span>
+            <span class="mc-tag">事实核查</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 焦点内容 ============ -->
+  <section class="mc-section alt" id="mc-focus">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>爆料焦点</h2>
+          <p>经编辑部核实的重点内容，涵盖赛制变化、战队动向与现场观察。</p>
+        </div>
+        <a href="#mc-flow" class="mc-sec-more">查看全部内容 →</a>
+      </div>
+      <div class="mc-focus-grid">
+        <article class="mc-feature-card">
+          <img alt="总决赛赛制调整说明会的现场大屏与主创团队" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Cdefs%3E%3ClinearGradient id='f1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23242c38'/%3E%3Cstop offset='1' stop-color='%230d1117'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='url(%23f1)'/%3E%3Crect x='90' y='80' width='620' height='230' rx='12' fill='%231a2230' stroke='%23f9b234' stroke-width='2'/%3E%3Crect x='120' y='112' width='250' height='18' rx='9' fill='%23f9b234' opacity='.85'/%3E%3Crect x='120' y='146' width='380' height='12' rx='6' fill='%2393a1b3' opacity='.6'/%3E%3Crect x='120' y='172' width='320' height='12' rx='6' fill='%2393a1b3' opacity='.45'/%3E%3Crect x='120' y='198' width='420' height='12' rx='6' fill='%2393a1b3' opacity='.3'/%3E%3Ccircle cx='620' cy='190' r='46' fill='none' stroke='%2338d6c4' stroke-width='6' stroke-dasharray='200 60'/%3E%3Ccircle cx='620' cy='190' r='26' fill='%23ef4444' opacity='.75'/%3E%3Cpath d='M580 380 H720' stroke='%23f9b234' stroke-width='4' opacity='.6'/%3E%3Cpath d='M80 380 H220' stroke='%2338d6c4' stroke-width='4' opacity='.6'/%3E%3Ctext x='90' y='418' fill='%23e6ebf2' font-size='17' font-family='sans-serif' opacity='.75'%3E赛制说明会 · 现场记录%3C/text%3E%3C/svg%3E">
+          <div class="mc-feature-body">
+            <div class="mc-meta"><span>官方发布</span><span>2026-11-19</span><span>阅读 2.8 万</span></div>
+            <h3>总决赛赛制调整落地：双败淘汰改为限时循环，七大细则全解析</h3>
+            <p>11月19日凌晨发布的赛制修订说明中，组委会确认总决赛阶段将启用限时循环赛制，单场时长上限由90分钟压缩至72分钟，并新增两轮加时判定规则。我们从会场内部拿到了完整修订对照表，逐条梳理变化对战队的影响：前期优势积累的价值被削弱，临场指挥权重上升，替补轮换策略将成为关键变量。同时，修订说明中还有一条未被广泛注意的时间线调整，可能直接影响跨赛区队伍的备赛节奏。</p>
+            <button class="mc-btn mc-btn-primary" type="button" data-mc-open="mcMediaModal">查看完整解析</button>
+          </div>
+        </article>
+        <div class="mc-mini-list">
+          <article class="mc-mini-card">
+            <img alt="云顶战队深夜训练室的备战画面" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23151b24'/%3E%3Crect x='40' y='150' width='320' height='90' rx='8' fill='%231c232e'/%3E%3Crect x='60' y='168' width='80' height='52' rx='4' fill='%2338d6c4' opacity='.55'/%3E%3Crect x='155' y='168' width='80' height='52' rx='4' fill='%23f9b234' opacity='.65'/%3E%3Crect x='250' y='168' width='80' height='52' rx='4' fill='%23ef4444' opacity='.5'/%3E%3Ccircle cx='200' cy='88' r='40' fill='none' stroke='%23f9b234' stroke-width='4'/%3E%3Cpath d='M182 88 L196 104 L222 70' stroke='%2338d6c4' stroke-width='5' fill='none'/%3E%3Ctext x='40' y='278' fill='%2393a1b3' font-size='14' font-family='sans-serif'%3E训练室 · 凌晨两点%3C/text%3E%3C/svg%3E">
+            <div class="mc-mini-info">
+              <h4>云顶战队深夜训练室曝光：三套备用阵容已准备就绪</h4>
+              <span>爆料 · 2026-11-18 · 阅读 1.4 万</span>
+            </div>
+          </article>
+          <article class="mc-mini-card">
+            <img alt="高校赛区报名现场的长队与展板" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%231a1410'/%3E%3Crect x='0' y='200' width='400' height='100' fill='%23241c12'/%3E%3Cg fill='%23f9b234' opacity='.6'%3E%3Ccircle cx='70' cy='180' r='16'/%3E%3Ccircle cx='130' cy='186' r='16'/%3E%3Ccircle cx='190' cy='178' r='16'/%3E%3Ccircle cx='250' cy='186' r='16'/%3E%3Ccircle cx='310' cy='180' r='16'/%3E%3C/g%3E%3Cg fill='%2338d6c4' opacity='.45'%3E%3Crect x='54' y='196' width='32' height='60' rx='8'/%3E%3Crect x='114' y='202' width='32' height='54' rx='8'/%3E%3Crect x='174' y='194' width='32' height='62' rx='8'/%3E%3Crect x='234' y='202' width='32' height='54' rx='8'/%3E%3Crect x='294' y='196' width='32' height='60' rx='8'/%3E%3C/g%3E%3Crect x='40' y='40' width='320' height='70' rx='10' fill='%23241c12' stroke='%23f9b234' stroke-width='2'/%3E%3Ctext x='66' y='86' fill='%23f9b234' font-size='22' font-weight='bold' font-family='sans-serif'%3E%E6%8A%A5%E5%90%8D%E5%A4%84%3C/text%3E%3C/svg%3E">
+            <div class="mc-mini-info">
+              <h4>高校赛区报名人数破万，组委会临时增设两个线上分站</h4>
+              <span>官方动态 · 2026-11-17 · 阅读 9,860</span>
+            </div>
+          </article>
+          <article class="mc-mini-card">
+            <img alt="裁判组工作台与规则手册特写" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23111827'/%3E%3Crect x='50' y='60' width='180' height='200' rx='8' fill='%23e6ebf2' opacity='.9'/%3E%3Crect x='70' y='90' width='120' height='10' rx='5' fill='%23111827' opacity='.5'/%3E%3Crect x='70' y='118' width='140' height='8' rx='4' fill='%23111827' opacity='.3'/%3E%3Crect x='70' y='140' width='130' height='8' rx='4' fill='%23111827' opacity='.3'/%3E%3Crect x='70' y='162' width='100' height='8' rx='4' fill='%23111827' opacity='.3'/%3E%3Ccircle cx='300' cy='170' r='58' fill='none' stroke='%23ef4444' stroke-width='5'/%3E%3Cpath d='M272 170 L292 192 L332 146' stroke='%23ef4444' stroke-width='7' fill='none'/%3E%3Ctext x='250' y='262' fill='%2393a1b3' font-size='14' font-family='sans-serif'%3E%E8%A3%81%E5%88%A4%E7%BB%84%3C/text%3E%3C/svg%3E">
+            <div class="mc-mini-info">
+              <h4>裁判组新增赛后复盘机制，争议判罚将公开发布说明</h4>
+              <span>深度解析 · 2026-11-16 · 阅读 7,420</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 热门内容流 ============ -->
+  <section class="mc-section" id="mc-flow">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>热门内容</h2>
+          <p>社区热度与编辑推荐共同排序，覆盖现场、访谈、技巧与幕后。</p>
+        </div>
+        <a href="#mc-topics" class="mc-sec-more">进入专题企划 →</a>
+      </div>
+      <div class="mc-flow">
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="总决赛现场镜头扫过观众席的瞬间" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23141a22'/%3E%3Ccircle cx='320' cy='150' r='90' fill='none' stroke='%23f9b234' stroke-width='4' opacity='.8'/%3E%3Ccircle cx='320' cy='150' r='58' fill='%23f9b234' opacity='.18'/%3E%3Cpath d='M300 130 L300 172 L340 150 Z' fill='%23f9b234'/%3E%3Cg fill='%2338d6c4' opacity='.5'%3E%3Crect x='60' y='286' width='60' height='48' rx='6'/%3E%3Crect x='140' y='294' width='60' height='40' rx='6'/%3E%3Crect x='220' y='282' width='60' height='52' rx='6'/%3E%3Crect x='300' y='292' width='60' height='42' rx='6'/%3E%3Crect x='380' y='284' width='60' height='50' rx='6'/%3E%3Crect x='460' y='294' width='60' height='40' rx='6'/%3E%3C/g%3E%3C/svg%3E">
+            <span class="mc-vbadge">现场直击</span>
+            <span class="mc-vtime">08:42</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>总决赛开场三分钟：镜头扫过观众席时发生了什么</h3>
+            <p>从入场音乐到第一波欢呼，我们用一段长镜头记录了开幕式最真实的气氛变化，也拍到了看台上几条手写应援横幅。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#f9b234">陈</span>陈默观察</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 1.2k</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="战队教练在休息区接受采访的画面" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23201a12'/%3E%3Crect x='0' y='250' width='640' height='110' fill='%232b2216'/%3E%3Ccircle cx='230' cy='150' r='46' fill='%23e0b07a'/%3E%3Cpath d='M180 250 Q230 180 280 250 Z' fill='%2338d6c4' opacity='.7'/%3E%3Crect x='330' y='90' width='12' height='150' rx='6' fill='%2393a1b3' opacity='.6'/%3E%3Ccircle cx='336' cy='86' r='14' fill='%23ef4444' opacity='.8'/%3E%3Ctext x='50' y='70' fill='%23f9b234' font-size='20' font-weight='bold' font-family='sans-serif'%3EINTERVIEW%3C/text%3E%3C/svg%3E">
+            <span class="mc-vbadge">人物访谈</span>
+            <span class="mc-vtime">12:06</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>执教第七年，他把“复盘”改成了每天早上的固定仪式</h3>
+            <p>一位不愿具名的教练谈起他的方法论：先让队员自己说，再让数据说话，最后才轮到教练的判断。这三步顺序他坚持了三年。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#38d6c4">林</span>林间编辑部</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 986</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="赛事数据面板与战术板叠加的分析画面" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%230f1620'/%3E%3Cg stroke='%232a3341' stroke-width='1'%3E%3Cpath d='M0 90 H640 M0 180 H640 M0 270 H640 M160 0 V360 M320 0 V360 M480 0 V360'/%3E%3C/g%3E%3Cpath d='M40 300 L160 240 L260 268 L380 160 L500 190 L600 96' stroke='%23f9b234' stroke-width='4' fill='none'/%3E%3Cg fill='%2338d6c4'%3E%3Ccircle cx='160' cy='240' r='6'/%3E%3Ccircle cx='380' cy='160' r='6'/%3E%3Ccircle cx='600' cy='96' r='6'/%3E%3C/g%3E%3Ctext x='40' y='60' fill='%23e6ebf2' font-size='20' font-weight='bold' font-family='sans-serif' opacity='.85'%3E%E8%83%9C%E7%8E%87%E8%B5%B0%E5%8A%BF%3C/text%3E%3C/svg%3E">
+            <span class="mc-vbadge">深度解析</span>
+            <span class="mc-vtime">15:20</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>限时循环赛制下，前期优势还值多少？我们算了三组数据</h3>
+            <p>用过去两个赛季的 214 场比赛做对照组，观察时间压缩对逆转概率的影响，结论比想象中复杂，也更依赖临场调整。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#ef4444">周</span>周衍数据室</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 1,540</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="深夜剪辑室中创作者的工作台与屏幕" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23131720'/%3E%3Crect x='120' y='70' width='400' height='220' rx='10' fill='%231c232e' stroke='%232a3341' stroke-width='2'/%3E%3Crect x='150' y='100' width='160' height='90' rx='5' fill='%23f9b234' opacity='.5'/%3E%3Crect x='330' y='100' width='160' height='90' rx='5' fill='%2338d6c4' opacity='.4'/%3E%3Crect x='150' y='208' width='340' height='14' rx='7' fill='%232a3341'/%3E%3Crect x='150' y='208' width='210' height='14' rx='7' fill='%23ef4444' opacity='.85'/%3E%3Ccircle cx='360' cy='215' r='9' fill='%23e6ebf2'/%3E%3C/svg%3E">
+            <span class="mc-vbadge">创作幕后</span>
+            <span class="mc-vtime">10:35</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>一条三分钟的爆料短片，剪辑台上被改了十一版</h3>
+            <p>从素材筛选到字幕节奏，创作者记录了完整的后期流程。他坚持保留两处没有配乐的空镜，理由是现场需要呼吸感。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#a78bfa">苏</span>苏晚剪辑间</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 742</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="城市探索镜头下的赛区场馆外景" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%231b2230'/%3E%3Crect x='0' y='260' width='640' height='100' fill='%23121a24'/%3E%3Cg fill='%232a3341'%3E%3Crect x='60' y='120' width='80' height='140' rx='4'/%3E%3Crect x='160' y='80' width='70' height='180' rx='4'/%3E%3Crect x='250' y='150' width='90' height='110' rx='4'/%3E%3C/g%3E%3Crect x='380' y='110' width='200' height='150' rx='10' fill='%231c232e' stroke='%23f9b234' stroke-width='3'/%3E%3Ccircle cx='480' cy='185' r='40' fill='none' stroke='%2338d6c4' stroke-width='4'/%3E%3Cpath d='M460 185 L476 202 L504 168' stroke='%2338d6c4' stroke-width='5' fill='none'/%3E%3C/svg%3E">
+            <span class="mc-vbadge">城市探索</span>
+            <span class="mc-vtime">09:14</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>跟着赛事走一座城：三个赛区场馆周边的生活半径</h3>
+            <p>比赛之外的步行路线、深夜食堂与老街区，我们把赛程表翻过来，做成了一张城市漫游地图，附上创作者实地拍摄的时间点。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#4ade80">何</span>何行记录</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 1,108</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="mc-vcard" data-mc-card>
+          <div class="mc-vthumb">
+            <img alt="普通观众在家中用手机记录比赛画面的场景" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23161220'/%3E%3Crect x='0' y='280' width='640' height='80' fill='%23201928'/%3E%3Crect x='220' y='70' width='110' height='190' rx='14' fill='%231c232e' stroke='%23a78bfa' stroke-width='3'/%3E%3Crect x='236' y='92' width='78' height='130' rx='6' fill='%23a78bfa' opacity='.35'/%3E%3Ccircle cx='275' cy='240' r='10' fill='%23a78bfa' opacity='.8'/%3E%3Cg fill='%23f9b234' opacity='.7'%3E%3Ccircle cx='450' cy='160' r='30'/%3E%3C/g%3E%3Cpath d='M430 160 L470 140 L470 180 Z' fill='%23f9b234'/%3E%3C/svg%3E">
+            <span class="mc-vbadge">日常记录</span>
+            <span class="mc-vtime">06:58</span>
+          </div>
+          <div class="mc-vbody">
+            <h3>一个普通观众的观赛手记：我在看台上记了满满两张纸</h3>
+            <p>没有专业设备，只有一部手机和一本便签。她记录的是比分之外的东西：旁边观众的情绪起伏，以及自己在关键时刻的反应。</p>
+            <div class="mc-vfoot">
+              <div class="mc-author"><span class="mc-avatar" style="background:#f472b6">尹</span>尹小满</div>
+              <div class="mc-vactions">
+                <button class="mc-icon-btn" type="button" data-mc-like>♡ 663</button>
+                <button class="mc-icon-btn" type="button" data-mc-fav>☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 专题企划 ============ -->
+  <section class="mc-section alt" id="mc-topics">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>专题企划</h2>
+          <p>围绕赛事机制、人物与城市的长期内容项目，持续更新中。</p>
+        </div>
+        <a href="#mc-rank" class="mc-sec-more">查看榜单 →</a>
+      </div>
+      <div class="mc-topic-grid">
+        <article class="mc-topic">
+          <img alt="专题封面：赛制之变的三次关键节点" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23111827'/%3E%3Cpath d='M40 340 L110 260 L180 290 L260 170' stroke='%23f9b234' stroke-width='4' fill='none'/%3E%3Cg fill='%23f9b234'%3E%3Ccircle cx='40' cy='340' r='8'/%3E%3Ccircle cx='110' cy='260' r='8'/%3E%3Ccircle cx='180' cy='290' r='8'/%3E%3Ccircle cx='260' cy='170' r='8'/%3E%3C/g%3E%3Ctext x='40' y='120' fill='%23e6ebf2' font-size='26' font-weight='bold' font-family='sans-serif'%3E%E8%B5%9B%E5%88%B6%3C/text%3E%3Ctext x='40' y='156' fill='%2338d6c4' font-size='18' font-family='sans-serif'%3E%E4%B9%8B%E5%8F%98%3C/text%3E%3C/svg%3E">
+          <div class="mc-topic-info">
+            <h4>赛制之变</h4>
+            <span>已更新 8 篇 · 持续追踪</span>
+          </div>
+        </article>
+        <article class="mc-topic">
+          <img alt="专题封面：站上替补席的年轻面孔" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23211a26'/%3E%3Ccircle cx='150' cy='150' r='58' fill='%23a78bfa' opacity='.4'/%3E%3Ccircle cx='150' cy='150' r='36' fill='%23a78bfa' opacity='.7'/%3E%3Crect x='60' y='250' width='180' height='16' rx='8' fill='%23a78bfa' opacity='.5'/%3E%3Crect x='90' y='286' width='120' height='16' rx='8' fill='%23f9b234' opacity='.6'/%3E%3Ctext x='48' y='350' fill='%23e6ebf2' font-size='22' font-weight='bold' font-family='sans-serif'%3E%E6%9B%BF%E8%A1%A5%E5%B8%AD%3C/text%3E%3C/svg%3E">
+          <div class="mc-topic-info">
+            <h4>替补席上的年轻人</h4>
+            <span>已更新 6 篇 · 人物访谈</span>
+          </div>
+        </article>
+        <article class="mc-topic">
+          <img alt="专题封面：夜行赛区城市灯光与场馆轮廓" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%230d1a1a'/%3E%3Crect x='0' y='260' width='300' height='140' fill='%23122a28'/%3E%3Cg fill='%2338d6c4' opacity='.6'%3E%3Crect x='40' y='180' width='36' height='80' rx='4'/%3E%3Crect x='96' y='140' width='36' height='120' rx='4'/%3E%3Crect x='152' y='196' width='36' height='64' rx='4'/%3E%3Crect x='208' y='160' width='36' height='100' rx='4'/%3E%3C/g%3E%3Ccircle cx='240' cy='80' r='34' fill='%23f9b234' opacity='.5'/%3E%3Ctext x='40' y='352' fill='%23e6ebf2' font-size='18' font-weight='bold' font-family='sans-serif'%3E%E5%A4%9C%E8%A1%8C%E8%B5%9B%E5%8C%BA%3C/text%3E%3C/svg%3E">
+          <div class="mc-topic-info">
+            <h4>夜行赛区</h4>
+            <span>已更新 5 篇 · 城市探索</span>
+          </div>
+        </article>
+        <article class="mc-topic">
+          <img alt="专题封面：数据面板与统计图表的组合" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23121a24'/%3E%3Cg fill='%23f9b234' opacity='.75'%3E%3Crect x='50' y='220' width='34' height='120' rx='4'/%3E%3Crect x='104' y='170' width='34' height='170' rx='4'/%3E%3Crect x='158' y='240' width='34' height='100' rx='4'/%3E%3Crect x='212' y='130' width='34' height='210' rx='4'/%3E%3C/g%3E%3Cpath d='M40 100 L260 60' stroke='%2338d6c4' stroke-width='3' stroke-dasharray='8 8'/%3E%3Ctext x='46' y='352' fill='%23e6ebf2' font-size='18' font-weight='bold' font-family='sans-serif'%3E%E6%95%B0%E6%8D%AE%E5%9C%BA%3C/text%3E%3C/svg%3E">
+          <div class="mc-topic-info">
+            <h4>数据场</h4>
+            <span>已更新 11 篇 · 深度解析</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 创作者矩阵 ============ -->
+  <section class="mc-section" id="mc-creators">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>创作者矩阵</h2>
+          <p>他们是内容生态的骨架，用各自的方法记录赛事与人的关系。</p>
+        </div>
+        <button class="mc-btn mc-btn-ghost" type="button" data-mc-open="mcJoinModal">申请成为创作者</button>
+      </div>
+      <div class="mc-creator-grid">
+
+        <article class="mc-creator">
+          <div class="mc-big-avatar" style="background:linear-gradient(135deg,#f9b234,#ef4444)">陈</div>
+          <h3>陈默观察</h3>
+          <div class="mc-role">现场影像 · 爆料主力</div>
+          <p>常驻现场的内容创作者，擅用长镜头与现场音记录赛事气氛，已连续跟拍四个赛季。</p>
+          <div class="mc-creator-stats">
+            <div><b>218</b><span>作品</span></div>
+            <div><b>12.4万</b><span>关注</span></div>
+          </div>
+          <button class="mc-creator-more" type="button" data-mc-author="陈默观察">查看档案</button>
+        </article>
+
+        <article class="mc-creator">
+          <div class="mc-big-avatar" style="background:linear-gradient(135deg,#38d6c4,#2563eb)">林</div>
+          <h3>林间编辑部</h3>
+          <div class="mc-role">人物访谈 · 深度长文</div>
+          <p>偏爱在赛后休息区找人聊天，把采访录音整理成有温度的人物侧写，语言克制但细节充沛。</p>
+          <div class="mc-creator-stats">
+            <div><b>164</b><span>作品</span></div>
+            <div><b>9.7万</b><span>关注</span></div>
+          </div>
+          <button class="mc-creator-more" type="button" data-mc-author="林间编辑部">查看档案</button>
+        </article>
+
+        <article class="mc-creator">
+          <div class="mc-big-avatar" style="background:linear-gradient(135deg,#ef4444,#f97316)">周</div>
+          <h3>周衍数据室</h3>
+          <div class="mc-role">数据分析 · 赛制解读</div>
+          <p>用表格和图表讲比赛，习惯先提出问题再给数据。他的复盘文章常被其他创作者引用。</p>
+          <div class="mc-creator-stats">
+            <div><b>97</b><span>作品</span></div>
+            <div><b>6.3万</b><span>关注</span></div>
+          </div>
+          <button class="mc-creator-more" type="button" data-mc-author="周衍数据室">查看档案</button>
+        </article>
+
+        <article class="mc-creator">
+          <div class="mc-big-avatar" style="background:linear-gradient(135deg,#a78bfa,#f472b6)">苏</div>
+          <h3>苏晚剪辑间</h3>
+          <div class="mc-role">后期制作 · 教程干货</div>
+          <p>专注短视频叙事节奏，账号里全是剪辑台上的失误与修正，反而成了新人最常翻的教科书。</p>
+          <div class="mc-creator-stats">
+            <div><b>132</b><span>作品</span></div>
+            <div><b>8.1万</b><span>关注</span></div>
+          </div>
+          <button class="mc-creator-more" type="button" data-mc-author="苏晚剪辑间">查看档案</button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 榜单 + 评价 ============ -->
+  <section class="mc-section alt" id="mc-rank">
+    <div class="mc-wrap">
+      <div class="mc-sec-head">
+        <div>
+          <h2>社区榜单</h2>
+          <p>基于内容热度、互动质量与编辑评审综合生成，每周更新一次。</p>
+        </div>
+      </div>
+      <div class="mc-rank-grid">
+        <div class="mc-rank">
+          <h3>本周热度榜</h3>
+          <ol>
+            <li>总决赛赛制调整落地<em>2.8万</em></li>
+            <li>云顶战队深夜训练室<em>1.4万</em></li>
+            <li>限时循环赛制数据推演<em>1.2万</em></li>
+            <li>三分钟爆料短片的十一版<em>9,860</em></li>
+            <li>一个观众的观赛手记<em>8,420</em></li>
+          </ol>
+        </div>
+        <div class="mc-rank">
+          <h3>新人榜</h3>
+          <ol>
+            <li>尹小满 · 日常记录<em>+1,260</em></li>
+            <li>何行记录 · 城市探索<em>+1,108</em></li>
+            <li>白鹿看台 · 现场随手拍<em>+964</em></li>
+            <li>沐野剪辑 · 短片段落<em>+851</em></li>
+            <li>阿雾的笔记 · 观赛攻略<em>+733</em></li>
+          </ol>
+        </div>
+        <div class="mc-rank">
+          <h3>口碑榜</h3>
+          <ol>
+            <li>林间编辑部 · 人物访谈<em>9.8 分</em></li>
+            <li>周衍数据室 · 深度解析<em>9.7 分</em></li>
+            <li>陈默观察 · 现场影像<em>9.6 分</em></li>
+            <li>苏晚剪辑间 · 教程干货<em>9.5 分</em></li>
+            <li>赛场边的声音 · 音频记录<em>9.3 分</em></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="mc-sec-head" style="margin-top:56px">
+        <div>
+          <h2>用户评价</h2>
+          <p>来自社区的真实反馈，我们保留原有语气与长度差异。</p>
+        </div>
+      </div>
+      <div class="mc-comments">
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#4ade80">苏</span>
+            <div><b>小满不加班</b><span>2026-11-18 · 社区用户</span></div>
+          </div>
+          <p>最打动我的是那篇关于替补席的访谈。看完之后我又回头翻了第一场他们上场的片段，原来很多东西当时就在画面里，只是没人注意到。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#f9b234">老</span>
+            <div><b>老陈的看台日记</b><span>2026-11-17 · 创作者</span></div>
+          </div>
+          <p>做内容最难的是坚持核实，尤其在人人都抢速度的时候。这里的编辑会认真回我的线索邮件，更正说明也做得很清楚，这点很难得。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#38d6c4">弧</span>
+            <div><b>三段圆弧</b><span>2026-11-16 · 社区用户</span></div>
+          </div>
+          <p>赛制那篇我来回看了三遍，数据部分写得克制但很扎实，没有为了显得专业而堆术语。希望以后能多出一点类似的长文。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#a78bfa">剪</span>
+            <div><b>剪辑小吴</b><span>2026-11-15 · 创作者</span></div>
+          </div>
+          <p>跟着剪辑教程练了一周，终于明白之前自己的视频为什么节奏散。作者把失败版本也放出来讲，这种分享方式特别实在。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#ef4444">风</span>
+            <div><b>风往南吹</b><span>2026-11-14 · 社区用户</span></div>
+          </div>
+          <p>我第一次在官网投了线索，本来没抱期待，结果两天后收到回复，还标注了哪些细节需要补充。虽然最后没被采用，但这个流程让我愿意再投一次。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#f472b6">D</span>
+            <div><b>Daybreak</b><span>2026-11-13 · 社区用户</span></div>
+          </div>
+          <p>城市漫游那期太好用了，我按着路线走了一整天，顺路还碰到了一个参赛队在场馆外拍照。这种内容的实用性比单纯的赛事新闻强太多。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#60a5fa">阿</span>
+            <div><b>阿雾的笔记</b><span>2026-11-12 · 新人创作者</span></div>
+          </div>
+          <p>新人榜上榜那天有点意外，因为我拍的只是很普通的观赛随记。后来想明白了，真实的东西大家是看得出来的，这一点让我很受鼓励。</p>
+        </article>
+        <article class="mc-comment">
+          <div class="mc-comment-head">
+            <span class="mc-avatar" style="background:#fbbf24">数</span>
+            <div><b>数着日子看比赛</b><span>2026-11-11 · 社区用户</span></div>
+          </div>
+          <p>建议增加一个按赛区筛选的功能，现在内容多了以后翻起来稍微费劲。整体体验还是好的，排版很清楚，手机上看也不累。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 动态 + FAQ ============ -->
+  <section class="mc-section" id="mc-news">
+    <div class="mc-wrap mc-two-col">
+      <div>
+        <div class="mc-sec-head" style="margin-bottom:18px">
+          <div><h2 style="font-size:23px">官方动态</h2></div>
+        </div>
+        <div class="mc-newsitem">
+          <time>11-19</time>
+          <div><h4>编辑部发布新版爆料核实流程说明</h4><p>新增来源标注与二次确认环节，公开三类可回溯记录的存档方式。</p></div>
+        </div>
+        <div class="mc-newsitem">
+          <time>11-18</time>
+          <div><h4>冬季赛区报名通道开启，限时征集</h4><p>本届冬季赛区面向个人与团队开放，报名材料与赛程说明已同步更新。</p></div>
+        </div>
+        <div class="mc-newsitem">
+          <time>11-16</time>
+          <div><h4>创作者扶持计划第三期名单公布</h4><p>本期共 24 位创作者入选，将获得编辑支持、后期协助与专题推荐资源。</p></div>
+        </div>
+        <div class="mc-newsitem">
+          <time>11-14</time>
+          <div><h4>「数据场」专题新增赛季对照数据模块</h4><p>可查看历史赛区的关键指标走势，支持按赛制与赛区维度切换。</p></div>
+        </div>
+        <div class="mc-newsitem">
+          <time>11-11</time>
+          <div><h4>官方发布内容规范修订版</h4><p>针对影像素材使用、现场拍摄与采访授权，进一步明确说明与指引。</p></div>
+        </div>
+      </div>
+
+      <div id="mc-faq">
+        <div class="mc-sec-head" style="margin-bottom:18px">
+          <div><h2 style="font-size:23px">帮助与常见问题</h2></div>
+        </div>
+        <div class="mc-faq">
+          <details>
+            <summary>如何提交一条爆料线索？</summary>
+            <p>可以在本页投稿入口填写线索摘要与素材来源。编辑部会在两个工作日内完成初次评估，并在采纳后与你确认署名方式与发布节奏。</p>
+          </details>
+          <details>
+            <summary>平台的内容为什么要经过核实流程？</summary>
+            <p>赛事相关信息的传播影响面较广，我们坚持先确认来源再公开发布。核实流程包括来源登记、交叉印证与编辑复核，部分内容还会补充现场素材佐证。</p>
+          </details>
+          <details>
+            <summary>创作者入驻需要准备什么？</summary>
+            <p>需要有稳定的内容产出计划与清晰的方向说明，并提供至少三条代表作品。我们更看重长期更新意愿与内容真实性，而非单纯的粉丝规模。</p>
+          </details>
+          <details>
+            <summary>为什么有些内容会标注更正说明？</summary>
+            <p>当后续信息与已发布内容出现偏差时，我们会在同一页面补充更正说明并保留记录，方便读者了解完整的过程，这也是我们对内容负责的方式。</p>
+          </details>
+          <details>
+            <summary>可以转载平台发布的内容吗？</summary>
+            <p>原创内容版权归创作者与平台共同所有，转载前请通过联系入口提交申请，注明用途与渠道，获得书面许可后按约定规范标注来源。</p>
+          </details>
+          <details>
+            <summary>专题企划的更新频率是怎样的？</summary>
+            <p>长期专题通常每周更新一到两篇，重点赛期会提高频次。每个专题页都会标注最近更新时间与累计篇数，方便持续关注。</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 投稿 / 联系 ============ -->
+  <section class="mc-section alt" id="mc-join">
+    <div class="mc-wrap">
+      <div class="mc-cta">
+        <div>
+          <h2>你有线索，我们有版面</h2>
+          <p>无论是一段现场影像、一次赛后觀察，还是一条尚未被注意的赛制变化，都可以通过官方网站的投稿入口送达编辑部。我们承诺认真阅读每一条投稿，并在核实后给出明确回复。</p>
+        </div>
+        <div class="mc-cta-btns">
+          <button class="mc-btn mc-btn-primary" type="button" data-mc-open="mcJoinModal">我要投稿</button>
+          <button class="mc-btn mc-btn-ghost" type="button" data-mc-copy>复制页面链接</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer class="mc-footer">
+  <div class="mc-wrap">
+    <div class="mc-footer-grid">
+      <div>
+        <a href="#mc-top" class="mc-logo" style="margin-bottom:10px">
+          <span class="mc-logo-mark">爆</span>
+          <span>每日大赛爆料<small>DAILY ARENA SCOOP</small></span>
+        </a>
+        <p class="mc-footer-desc">每日大赛爆料官方网站，专注赛事资讯、现场爆料与人物访谈的原创内容平台，持续运营，值得信赖。</p>
+      </div>
+      <div>
+        <h4>内容</h4>
+        <ul>
+          <li><a href="#mc-focus">爆料焦点</a></li>
+          <li><a href="#mc-flow">热门内容</a></li>
+          <li><a href="#mc-topics">专题企划</a></li>
+          <li><a href="#mc-rank">社区榜单</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#mc-about">品牌故事</a></li>
+          <li><a href="#mc-creators">创作者矩阵</a></li>
+          <li><a href="#mc-news">官方动态</a></li>
+          <li><a href="#mc-faq">帮助中心</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>联系</h4>
+        <ul>
+          <li>投稿邮箱：scoop@dailyarena.example</li>
+          <li>合作咨询：biz@dailyarena.example</li>
+          <li>工作时间：周一至周五 10:00-19:00</li>
+          <li><button type="button" data-mc-open="mcJoinModal" style="color:var(--mc-gold)">在线提交线索</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mc-footer-bottom">
+      <span>© 2026 每日大赛爆料官方网站 · 企业版权所有 · 内容持续运营中</span>
+      <span>沪ICP备2026011988号-2 · 内容均为原创，转载请获取授权</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ Toast / 弹窗 / 回顶 ============ -->
+<div class="mc-toast" id="mcToast" role="status" aria-live="polite"></div>
+
+<div class="mc-modal" id="mcJoinModal" role="dialog" aria-modal="true" aria-label="投稿入口">
+  <div class="mc-modal-box">
+    <button class="mc-modal-close" type="button" data-mc-close aria-label="关闭">×</button>
+    <h3>提交爆料线索</h3>
+    <p>请简要描述线索内容与来源，编辑部将在两个工作日内回复。</p>
+    <input type="text" id="mcJoinName" placeholder="你的称呼" aria-label="你的称呼">
+    <textarea id="mcJoinMsg" placeholder="线索摘要、发生时间与可核实的来源信息" aria-label="线索摘要"></textarea>
+    <button class="mc-btn mc-btn-primary" type="button" id="mcJoinSubmit" style="width:100%;justify-content:center">提交线索</button>
+  </div>
+</div>
+
+<div class="mc-modal" id="mcMediaModal" role="dialog" aria-modal="true" aria-label="内容详情">
+  <div class="mc-modal-box">
+    <button class="mc-modal-close" type="button" data-mc-close aria-label="关闭">×</button>
+    <h3>总决赛赛制调整落地：七大细则全解析</h3>
+    <p>本文为编辑部核实后的解析摘要，完整内容包含赛制对照表、时间线变化与三组数据推演。页面内可继续浏览相关专题与创作者解读。</p>
+    <ul style="font-size:13px;color:var(--mc-muted);display:grid;gap:8px;margin-bottom:16px">
+      <li>· 单场上限由 90 分钟压缩至 72 分钟</li>
+      <li>· 双败淘汰改为限时循环赛制</li>
+      <li>· 新增两轮加时判定规则</li>
+      <li>· 跨赛区队伍备赛周期同步调整</li>
+    </ul>
+    <button class="mc-btn mc-btn-ghost" type="button" data-mc-close style="width:100%;justify-content:center">返回页面</button>
+  </div>
+</div>
+
+<div class="mc-modal" id="mcAuthorModal" role="dialog" aria-modal="true" aria-label="创作者档案">
+  <div class="mc-modal-box">
+    <button class="mc-modal-close" type="button" data-mc-close aria-label="关闭">×</button>
+    <h3 id="mcAuthorName">创作者档案</h3>
+    <p id="mcAuthorDesc">该创作者长期为平台提供原创内容，参与多个专题企划。</p>
+    <button class="mc-btn mc-btn-ghost" type="button" data-mc-close style="width:100%;justify-content:center">关闭</button>
+  </div>
+</div>
+
+<button class="mc-backtop" id="mcBacktop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 移动端导航折叠 ---------- */
+  var burger = document.getElementById("mcBurger");
+  var nav = document.getElementById("mcNav");
+  if(burger && nav){
+    burger.addEventListener("click", function(){
+      var open = nav.classList.toggle("open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.textContent = open ? "✕" : "☰";
+    });
+    nav.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){
+        if(window.innerWidth <= 760){
+          nav.classList.remove("open");
+          burger.setAttribute("aria-expanded","false");
+          burger.textContent = "☰";
+        }
+      });
+    });
+  }
+
+  /* ---------- Toast ---------- */
+  var toast = document.getElementById("mcToast");
+  var toastTimer = null;
+  function showToast(msg){
+    if(!toast) return;
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove("show"); }, 2200);
+  }
+
+  /* ---------- 搜索反馈 ---------- */
+  var searchInput = document.getElementById("mcSearchInput");
+  var searchBtn = document.getElementById("mcSearchBtn");
+  function doSearch(){
+    var key = (searchInput && searchInput.value || "").trim();
+    if(!key){
+      showToast("请输入关键词后再搜索");
+      return;
+    }
+    showToast("已为你检索「" + key + "」相关爆料与专题");
+    searchInput.value = "";
+  }
+  if(searchBtn) searchBtn.addEventListener("click", doSearch);
+  if(searchInput){
+    searchInput.addEventListener("keydown", function(e){
+      if(e.key === "Enter"){ e.preventDefault(); doSearch(); }
+    });
+  }
+
+  /* ---------- 点赞 / 收藏 ---------- */
+  document.querySelectorAll("[data-mc-like]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var text = btn.textContent.replace(/[♡♥]/g,"").trim();
+      var num = parseFloat(text.replace(/,/g,""));
+      var isLiked = btn.classList.contains("on");
+      if(!isNaN(num)){
+        num = isLiked ? Math.max(0, num - 1) : num + 1;
+        var out = num >= 1000 ? (num/1000).toFixed(1).replace(/\.0$/,"") + "k" : String(num);
+        btn.textContent = (isLiked ? "♡ " : "♥ ") + out;
+      }
+      btn.classList.toggle("on", !isLiked);
+      showToast(isLiked ? "已取消点赞" : "已点赞，感谢支持");
+    });
+  });
+
+  document.querySelectorAll("[data-mc-fav]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var isFav = btn.classList.contains("on");
+      btn.classList.toggle("on", !isFav);
+      btn.textContent = isFav ? "☆ 收藏" : "★ 已收藏";
+      showToast(isFav ? "已取消收藏" : "已加入收藏，稍后可在此继续查看");
+    });
+  });
+
+  /* ---------- 弹窗 ---------- */
+  var modals = document.querySelectorAll(".mc-modal");
+  function closeAll(){
+    modals.forEach(function(m){ m.classList.remove("show"); });
+    document.body.style.overflow = "";
+  }
+  function openModal(id){
+    closeAll();
+    var m = document.getElementById(id);
+    if(m){ m.classList.add("show"); document.body.style.overflow = "hidden"; }
+  }
+  document.querySelectorAll("[data-mc-open]").forEach(function(btn){
+    btn.addEventListener("click", function(){ openModal(btn.getAttribute("data-mc-open")); });
+  });
+  document.querySelectorAll("[data-mc-close]").forEach(function(btn){
+    btn.addEventListener("click", closeAll);
+  });
+  modals.forEach(function(m){
+    m.addEventListener("click", function(e){ if(e.target === m) closeAll(); });
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeAll();
+  });
+
+  /* ---------- 作者档案弹窗 ---------- */
+  var authorData = {
+    "陈默观察": "现场影像方向的创作者，连续四个赛季跟拍赛区，擅长用长镜头与现场音保留气氛细节。累计发布 218 条原创内容，多个专题由他提供一手素材。",
+    "林间编辑部": "人物访谈方向，专注于赛后休息区的真实对话。作品强调细节与克制表达，累计 164 条内容，口碑榜长期位于前列。",
+    "周衍数据室": "数据分析与赛制解读方向，习惯先提出问题再给数据，复盘文章常被其他创作者引用，累计发布 97 条深度内容。",
+    "苏晚剪辑间": "后期制作与教程方向，分享剪辑台上的失误与修正过程，累计 132 条内容，是新人创作者最常参考的账号之一。"
+  };
+  var authorName = document.getElementById("mcAuthorName");
+  var authorDesc = document.getElementById("mcAuthorDesc");
+  document.querySelectorAll("[data-mc-author]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var name = btn.getAttribute("data-mc-author");
+      if(authorName) authorName.textContent = name;
+      if(authorDesc) authorDesc.textContent = authorData[name] || "该创作者长期为平台提供原创内容，参与多个专题企划。";
+      openModal("mcAuthorModal");
+    });
+  });
+
+  /* ---------- 投稿提交 ---------- */
+  var joinSubmit = document.getElementById("mcJoinSubmit");
+  if(joinSubmit){
+    joinSubmit.addEventListener("click", function(){
+      var name = document.getElementById("mcJoinName");
+      var msg = document.getElementById("mcJoinMsg");
+      if(!name.value.trim() || !msg.value.trim()){
+        showToast("请填写称呼与线索摘要");
+        return;
+      }
+      showToast("线索已提交，编辑部将在两个工作日内回复");
+      name.value = "";
+      msg.value = "";
+      closeAll();
+    });
+  }
+
+  /* ---------- 复制链接 ---------- */
+  document.querySelectorAll("[data-mc-copy]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var link = "https://dailyarena.example/news";
+      function done(){
+        showToast("链接已复制，可分享给同好");
+        btn.textContent = "已复制";
+        setTimeout(function(){ btn.textContent = "复制页面链接"; }, 2000);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(link).then(done).catch(function(){
+          showToast("复制失败，请手动选择地址");
+        });
+      } else {
+        var tmp = document.createElement("textarea");
+        tmp.value = link;
+        document.body.appendChild(tmp);
+        tmp.select();
+        try { document.execCommand("copy"); done(); }
+        catch(e){ showToast("复制失败，请手动选择地址"); }
+        document.body.removeChild(tmp);
+      }
+    });
+  });
+
+  /* ---------- 回到顶部 ---------- */
+  var backtop = document.getElementById("mcBacktop");
+  function onScroll(){
+    if(!backtop) return;
+    if(window.scrollY > 520){ backtop.classList.add("show"); }
+    else { backtop.classList.remove("show"); }
+  }
+  window.addEventListener("scroll", onScroll, { passive:true });
+  if(backtop){
+    backtop.addEventListener("click", function(){
+      window.scrollTo({ top:0, behavior:"smooth" });
+    });
+  }
+  onScroll();
+})();
+</script>
+</body>
+      </html>
